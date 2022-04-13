@@ -39,6 +39,7 @@ contacts = [
 
 @app.route('/')
 def index():
+  contacts = contacts.query.all()
   return render_template(
     'index.html', 
     contacts=contacts
@@ -49,26 +50,31 @@ def create():
   name= request.form.get('name')
   email= request.form.get('email')
   phone= request.form.get('phone')
-  contacts.append({
-    'name': name,
-    'email': email,
-    'phone': phone
-  })
+  new_contacts = contacts(
+    name=name,
+    email=email,
+    phone=phone  
+  )
+  db.session.add(new_contacts)
+  db.session.commit()
   return redirect('/')
-
+  
 @app.route('/delete/<int:index>')
-def delete(index):
-  contacts.pop(index)
+def delete(id):
+  contacts = contacts.query.filter_by(id=id).first()
+  db.session.delete(contacts)
+  db.session.commit())
   return redirect('/')
 
 @app.route('/update/<int:index>', methods=['POST'])
-def update(index):
+def update(id):
   name = request.form.get('name')
-  contacts[index]['name'] = name
   email = request.form.get('email')
-  contacts[index]['email'] = email
   phone = request.form.get('phone')
-  contacts[index]['phone'] = phone
+
+  contacts = contacts.query.filter_by(id=id).first()
+  db.session.delete(contacts)
+  db.session.commit())
   return redirect('/')
   
 if __name__ == '__main__':

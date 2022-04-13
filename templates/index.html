@@ -21,7 +21,7 @@
    <ul>
     {% for item in contacts %}
       <li>
-        <form action="/update/{{ loop.index0 }}" method="POST">
+        <form action="/update/{{ loop.id }}" method="POST">
             <input name="name" value="{{ item.name }}">
             <input name="email" value="{{ item.email }}">
             <input name="phone" value="{{ item.phone }}">
