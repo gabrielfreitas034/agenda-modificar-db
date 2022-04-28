@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask('app')
+app.config['SECRET_KEY'] = 'abcd1234'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
@@ -26,10 +27,13 @@ class Contacts(db.Model):
 
 @app.route('/')
 def index():
-  contacts = Contacts.query.all()
+  if 'user_id' not in session:
+    return redirect('/login')
+  
+  cont = Contacts.query.all()
   return render_template(
     'index.html',
-    contacts=contacts
+    cont=cont
   )
 
 @app.route('/create', methods=['POST'])
@@ -41,6 +45,7 @@ def create():
     name=name, 
     email=email, 
     phone=phone,
+    user_id=session['user_id']
   )
   db.session.add(new_cont)
   db.session.commit()
@@ -53,17 +58,16 @@ def delete(id):
   db.session.commit()
   return redirect('/')
 
-
 @app.route('/update/<int:id>', methods=['POST'])
 def update(id):
   name = request.form.get('name')
   email = request.form.get('email')
-  phone = request.form.get('phone')
+  phone = request.form.get('phone') 
   cont = Contacts.query.filter_by(id=id).first()
   cont.name = name
   cont.email = email
   cont.phone = phone
-  db.session.commit()  
+  db.session.commit()   
   return redirect('/')
 
 @app.route('/login')
