@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -116,7 +116,7 @@ def signin():
 def logout():
   session.pop('user_id', None)
   return redirect('/login')
-
+  
 # IMPORTANTE V
 if __name__ == '__main__':
   db.create_all()
