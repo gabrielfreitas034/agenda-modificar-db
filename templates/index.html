@@ -9,33 +9,33 @@
   <link rel="stylesheet" href="/static/neumorphism-ui.css">
 </head>
 <body class="dark-mode">
+  <div class="sul-box-raised-2 container">
+    <h1>Agenda de Contatos</h1>
   
-  <h1>Agenda de Contatos</h1>
-
-  <form action="/signin" method="POST">
-    <input class="sul-text-field" name="name" placeholder="Nome">
-    <input class="sul-text-field" name="email" placeholder="E-mail">
-    <input class="sul-text-field" name="phone" placeholder="Telefone">
-    <button class="sul-btn" type="submit">
-      Adicionar
-    </button>
-  </form>
-
-   <ul>
-    {% for item in contacts %}
-      <li>
-        <form action="/update/{{item.id}}" method="POST">
-            <input name="name" value="{{ item.name }}">
-            <input name="email" value="{{ item.email }}">
-            <input name="phone" value="{{ item.phone }}">
-            <button type="submit">Editar</button>
-        </form>
-        
-        <a href="/delete/{{item.id}}">❌</a>
-      </li>
-    {% endfor %} 
-  </ul>
-
+    <form action="/signin" method="POST">
+      <input class="sul-text-field" name="name" placeholder="Nome">
+      <input class="sul-text-field" name="email" placeholder="E-mail">
+      <input class="sul-text-field" name="phone" placeholder="Telefone">
+      <button class="sul-btn" type="submit">
+        Adicionar
+      </button>
+    </form>
+  
+     <ul>
+      {% for item in contacts %}
+        <li>
+          <form action="/update/{{item.id}}" method="POST">
+              <input name="name" value="{{ item.name }}">
+              <input name="email" value="{{ item.email }}">
+              <input name="phone" value="{{ item.phone }}">
+              <button type="submit">Editar</button>
+          </form>
+          
+          <a href="/delete/{{item.id}}">❌</a>
+        </li>
+      {% endfor %} 
+    </ul>
+  </div>
   {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
       <div class="messages">

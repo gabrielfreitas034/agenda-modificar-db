@@ -140,6 +140,13 @@ def logout():
 def flashing():
   flash('Sucesso', 'success')
   return render_template('flashing.html')
+
+@app.route('/hello')
+def hello():
+  name_input = request.form.get('name')
+  name = Users.query.filter_by(name=name_input).first()
+  flash(f'Bem-vindo, {name}!','info')
+  return render_template('hello.html')
   
 # IMPORTANTE V
 if __name__ == '__main__':
