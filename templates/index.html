@@ -5,15 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AGENDA</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/neumorphism-ui.css">
 </head>
-<body>
+<body class="dark-mode">
+  
   <h1>Agenda de Contatos</h1>
 
-   <form action="/create" method="POST">
-    <input name="name" placeholder="Nome">
-    <input name="email" placeholder="E-mail">
-    <input name="phone" placeholder="Telefone">
-    <button type="submit">
+  <form action="/signin" method="POST">
+    <input class="sul-text-field" name="name" placeholder="Nome">
+    <input class="sul-text-field" name="email" placeholder="E-mail">
+    <input class="sul-text-field" name="phone" placeholder="Telefone">
+    <button class="sul-btn" type="submit">
       Adicionar
     </button>
   </form>
@@ -32,6 +35,32 @@
       </li>
     {% endfor %} 
   </ul>
+
+  {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      <div class="messages">
+        {% for type, text in messages %}
+          <div class="{{ type }}">
+            <span>{{ text }}</span> 
+          <button class="close" onclick="closeMsg();">
+            x
+          </button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <script>
+    function closeMsg() {
+      this.parentsElement.style.display = 'none';
+    }
+    
+    setTimeout(function() {
+      const msgElement = document.querySelector('.messages');
+      msgElement.style.display = 'none';
+    }, 5000); 
+  </script>
   
 </body>
 </html>
