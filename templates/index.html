@@ -12,7 +12,7 @@
   <div class="sul-box-raised-2 container">
     <h1>Agenda de Contatos</h1>
   
-    <form action="/signin" method="POST">
+    <form action="/create" method="POST">
       <input class="sul-text-field" name="name" placeholder="Nome">
       <input class="sul-text-field" name="email" placeholder="E-mail">
       <input class="sul-text-field" name="phone" placeholder="Telefone">
@@ -36,7 +36,8 @@
       {% endfor %} 
     </ul>
   </div>
-  {% with messages = get_flashed_messages(with_categories=True) %}
+  
+   {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
       <div class="messages">
         {% for type, text in messages %}

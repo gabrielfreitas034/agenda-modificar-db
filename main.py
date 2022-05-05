@@ -31,7 +31,7 @@ def index():
     flash('Usuário não logado', 'error')
     return redirect('/login')
   
-  cont = Contacts.query.all()
+  cont = Contacts.query.filter_by(user_id=session['user_id']).all()
   return render_template(
     'index.html',
     cont=cont
@@ -114,12 +114,12 @@ def signin():
   email_input = request.form.get('email')
   password_input = request.form.get('password')
 
-  # Verificar se existe um usário com o email 
+  # Verificar se existe um usuário com o email
   user = Users.query.filter_by(email=email_input).first()
   if not user:
     flash('E-mail não encontrado', 'error')
     return redirect('/login')
-  
+
   # Verificar se senha está correta
   if not check_password_hash(user.password, password_input):
     flash('Senha incorreta', 'error')
@@ -143,10 +143,8 @@ def flashing():
 
 @app.route('/hello')
 def hello():
-  name_input = request.form.get('name')
-  name = Users.query.filter_by(name=name_input).first()
-  flash(f'Bem-vindo, {name}!','info')
-  return render_template('hello.html')
+    flash(f'Bem-vindo, {id}!', 'info')
+    return render_template('hello.html')
   
 # IMPORTANTE V
 if __name__ == '__main__':
