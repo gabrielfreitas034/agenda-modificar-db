@@ -141,9 +141,9 @@ def flashing():
   flash('Sucesso', 'success')
   return render_template('flashing.html')
 
-@app.route('/hello')
-def hello():
-    flash(f'Bem-vindo, {id}!', 'info')
+@app.route('/hello/<name>')
+def hello(name):
+    flash(f'Bem-vindo, {name}!', 'info')
     return render_template('hello.html')
   
 # IMPORTANTE V
