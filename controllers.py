@@ -138,6 +138,8 @@ class CalcController():
     return f'Mult = {mult}'
 
   def div(num1, num2):
-    div = num1 / num2
-    return f'Div = {div:.2f}'
-  
+    if num1 == 0 or num2 == 0:
+      return 'Divisao por zero!'
+    else:  
+      div = num1 / num2
+      return f'Div = {div:.2f}'
