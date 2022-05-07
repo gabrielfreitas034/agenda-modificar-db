@@ -135,10 +135,10 @@ class CalcController():
 
   def mult(num1, num2):
     mult = num1 * num2 
-    return f'Sub = {mult}'
+    return f'Mult = {mult}'
 
   def div(num1, num2):
     div = num1 / num2 
-    return f'Sub = {div}'
+    return f'Div = {div}'
   
   
