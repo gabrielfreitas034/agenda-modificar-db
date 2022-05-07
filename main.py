@@ -53,7 +53,7 @@ def flashing():
 def hello(name):
   return FlashingController.hello(name)
 
-@app.route('/sum/<num1>/<num2>')
+@app.route('/sum/<int:num1>/<int:num2>')
 def sum(num1, num2):
   return CalcController.sum(num1, num2)
 
