@@ -128,5 +128,17 @@ class CalcController():
   def sum(num1, num2):
     sum = num1 + num2 
     return f'Soma = {sum}'
+
+  def sub(num1, num2):
+    sub = num1 - num2 
+    return f'Sub = {sub}'
+
+  def mult(num1, num2):
+    mult = num1 * num2 
+    return f'Sub = {mult}'
+
+  def div(num1, num2):
+    div = num1 / num2 
+    return f'Sub = {div}'
   
   

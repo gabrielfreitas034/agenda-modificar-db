@@ -57,6 +57,20 @@ def hello(name):
 def sum(num1, num2):
   return CalcController.sum(num1, num2)
 
+@app.route('/sub/<int:num1>/<int:num2>')
+def sub(num1, num2):
+  return CalcController.sub(num1, num2)
+
+@app.route('/mult/<int:num1>/<int:num2>')
+def mult(num1, num2):
+  return CalcController.mult(num1, num2)
+
+@app.route('/div/<int:num1>/<int:num2>')
+def div(num1, num2):
+  return CalcController.div(num1, num2)
+
+
+
 ###### INICIALIZACAO ######
 with app.app_context():
   db.create_all()
