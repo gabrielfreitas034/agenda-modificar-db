@@ -138,7 +138,6 @@ class CalcController():
     return f'Mult = {mult}'
 
   def div(num1, num2):
-    div = num1 / num2 
-    return f'Div = {div}'
-  
+    div = num1 / num2
+    return f'Div = {div:.2f}'
   
