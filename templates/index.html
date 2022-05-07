@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AGENDA</title>
+  <title>Agenda</title>
   <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/static/neumorphism-ui.css">
 </head>
 <body class="dark-mode">
   <div class="sul-box-raised-2 container">
     <h1>Agenda de Contatos</h1>
-  
+    <!-- Formulário de criação de TODO -->
     <form action="/create" method="POST">
       <input class="sul-text-field" name="name" placeholder="Nome">
       <input class="sul-text-field" name="email" placeholder="E-mail">
@@ -20,31 +20,31 @@
         Adicionar
       </button>
     </form>
-  
-     <ul>
-      {% for item in contacts %}
+
+    <!-- Exibição da lista de TODOs -->
+    <ul>
+      {% for item in cont %}
         <li>
-          <form action="/update/{{item.id}}" method="POST">
-              <input name="name" value="{{ item.name }}">
-              <input name="email" value="{{ item.email }}">
-              <input name="phone" value="{{ item.phone }}">
-              <button type="submit">Editar</button>
+          <form action="/update/{{ item.id }}" method="POST">
+              <input class="sul-text-field" name="name" value="{{ item.name }}">
+              <input class="sul-text-field" name="email" value="{{ item.email }}">
+              <input class="sul-text-field" name="phone" value="{{ item.phone }}">
+              <button class="sul-btn" type="submit">Editar</button>
           </form>
-          
-          <a href="/delete/{{item.id}}">❌</a>
+          <a href="/delete/{{ item.id }}">❌</a>
         </li>
       {% endfor %} 
     </ul>
   </div>
   
-   {% with messages = get_flashed_messages(with_categories=True) %}
+  {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
       <div class="messages">
         {% for type, text in messages %}
           <div class="{{ type }}">
             <span>{{ text }}</span> 
           <button class="close" onclick="closeMsg();">
-            x
+            ❌    
           </button>
           </div>
         {% endfor %}
