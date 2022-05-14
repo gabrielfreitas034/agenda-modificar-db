@@ -1,6 +1,7 @@
+import os
 from flask import Flask
 from database import db
-from controllers import TodoController, UserController,FlashingController, CalcController
+from controllers import ContactsController, UserController,FlashingController, CalcController
 
 ###### CONFIGURACOES ######
 app = Flask('app')
@@ -11,19 +12,19 @@ db.init_app(app)
 ###### ROTAS ######
 @app.route('/')
 def index():
-  return TodoController.index()
+  return ContactsController.index()
 
 @app.route('/create', methods=['POST'])
 def create():
-  return TodoController.create()
+  return ContactsController.create()
 
 @app.route('/delete/<int:id>')
 def delete(id):
-  return TodoController.delete(id)
+  return ContactsController.delete(id)
 
 @app.route('/update/<int:id>', methods=['POST'])
 def update(id):
-  return TodoController.update(id)
+  return ContactsController.update(id)
 
 @app.route('/login')
 def login():
@@ -76,6 +77,7 @@ with app.app_context():
   db.create_all()
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=8080)
-  
-#replit.com/@ednascimento/todo-db#main.py
+  port = int(os.environ.get('PORT', 5000))
+  app.run(host='0.0.0.0', port=port)
+
+# https://replit.com/@ednascimento/todo-db#main.py

@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import Contacts, Users, db
 
-class TodoController():
+class ContactsController():
   def index():
     if 'user_id' not in session:
       flash('Usuário não logado', 'error')
